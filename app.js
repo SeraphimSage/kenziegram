@@ -29,10 +29,17 @@ app.get("/", (req, res) => {
 			background-color: darkgray;
 		}
 
+		h1 {
+			text-align: center;
+		}
 		#pictureForm {
 			position: relative;
 			align-self: center;
 			text-align: center;
+		}
+
+		label, #image, button {
+			padding: 10px;
 		}
 
 		h2 {
@@ -48,6 +55,7 @@ app.get("/", (req, res) => {
 
 		img {
 			flex-basis: auto;
+			border-radius: 50%;
 		}
 		
 		</style>
