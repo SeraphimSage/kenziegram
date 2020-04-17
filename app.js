@@ -24,18 +24,48 @@ app.get("/", (req, res) => {
 			return `<img style = 'height:200px' src='./uploads/${image}' />`;
 		});
 		res.send(`
-            <h1>Kenziegram</h1>
-            <form method='post' action='/upload' enctype='multipart/form-data'>
-                <div>
-                    <label for='image'>Choose a picture</label>
+		<style>
+			body {
+			background-color: darkgray;
+		}
+
+		#pictureForm {
+			position: relative;
+			align-self: center;
+			text-align: center;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		#sentPictures {
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			flex-direction: row-reverse;
+		}
+
+		img {
+			flex-basis: auto;
+		}
+		
+		</style>
+		<h1>Kenziegram</h1>
+            <form id="pictureForm" method='post' action='/upload' enctype='multipart/form-data'>
+                <div >
+					<label for='image'>Choose a picture</label>
+					<br />
                     <input type="file" id="image" name="image">
-                </div>
+				</div>
                 <div>
                     <button>Send the picture</button>
                 </div>
             </form>
-            <h2>Sent Pictures</h2>
+			<h2>Sent Pictures</h2>
+			<div id="sentPictures">
             ${images}
+			</div>
         `);
 	});
 });
