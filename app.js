@@ -23,6 +23,7 @@ let requestCount = 0;
 app.get("/", (req, res) => {
 	const path = "./public/uploads";
 	fs.readdir(path, (err, items) => {
+		var modified = fs.statSync(imagePath).mtimeMs;
 		const images = items.map((image) => {
 			res.render("index", { title: "Kenziegram", images: items });
 		});
