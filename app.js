@@ -3,7 +3,7 @@ const multer = require("multer");
 const app = express();
 const fs = require("fs");
 app.set("views", "./views");
-app.set("view engine ", "pug");
+app.set("view engine", "pug");
 
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
