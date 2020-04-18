@@ -1,5 +1,6 @@
 {
 	"name": "kenziegram",
+	"homepage": "https://seraphimsage.gitlab.io/kenziegram",
 	"version": "1.0.0",
 	"description": "",
 	"main": "app.js",
