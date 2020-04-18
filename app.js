@@ -18,6 +18,7 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const uploaded_files = [];
+let requestCount = 0;
 
 app.get("/", (req, res) => {
 	const path = "./public/uploads";
@@ -28,10 +29,20 @@ app.get("/", (req, res) => {
 	});
 });
 
-app.post("/upload", upload.single("image"), function (request, response, next) {
-	uploaded_files.push(request.file.filename);
-	console.log("Uploaded: " + request.file.filename);
-	response.redirect("/");
+app.post("/upload", upload.single("image"), (req, res, next) => {
+	uploaded_files.push(req.file.filename);
+	console.log("Uploaded: " + req.file.filename);
+
+	res.redirect("/");
+});
+
+app.get("/poll", (req, res) => {
+	if (requestCount < uploaded_files.length) {
+		res.send({ image: uploaded_files[requestCount] });
+		requestCount++;
+	} else {
+		res.send({});
+	}
 });
 
 app.use(express.static("./public"));

@@ -1,7 +1,7 @@
 pages:
   stage: deploy
-  script: 
-    - echo "Using project \"public\" directory"
+  script:
+    - nodemon app.js
   artifacts:
     paths:
       - public
