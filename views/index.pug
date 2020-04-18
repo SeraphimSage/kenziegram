@@ -1,0 +1,12 @@
+html
+    head
+        title=title
+    body
+        h1=title
+        form(action="/upload", method="post", enctype='multipart/form-data')
+            div
+                label(for="image") = "Choose a picture"
+                input(type="file", name="image" id="image")
+            div
+                button="Send the picture"
+        h2= "Sent pictures"

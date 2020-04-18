@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require("multer");
 const app = express();
 const fs = require("fs");
+app.set("views", "./views");
+app.set("view engine ", "pug");
 
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
@@ -18,64 +20,65 @@ const upload = multer({ storage: storage });
 const uploaded_files = [];
 
 app.get("/", (req, res) => {
+	res.render("index", { title: "Kenziegram" });
 	const path = "./public/uploads";
-	fs.readdir(path, (err, items) => {
-		const images = items.map((image) => {
-			return `<img style = 'height:200px' src='./uploads/${image}' />`;
-		});
-		res.send(`
-		<style>
-			body {
-			background-color: darkgray;
-		}
+	// fs.readdir(path, (err, items) => {
+	// 	const images = items.map((image) => {
+	// 		return `<img style = 'height:200px' src='./uploads/${image}' />`;
+	// 	});
+	// 	res.send(`
+	// 	<style>
+	// 		body {
+	// 		background-color: darkgray;
+	// 	}
 
-		h1 {
-			text-align: center;
-		}
-		#pictureForm {
-			position: relative;
-			align-self: center;
-			text-align: center;
-		}
+	// 	h1 {
+	// 		text-align: center;
+	// 	}
+	// 	#pictureForm {
+	// 		position: relative;
+	// 		align-self: center;
+	// 		text-align: center;
+	// 	}
 
-		label, #image, button {
-			padding: 10px;
-		}
+	// 	label, #image, button {
+	// 		padding: 10px;
+	// 	}
 
-		h2 {
-			text-align: center;
-		}
+	// 	h2 {
+	// 		text-align: center;
+	// 	}
 
-		#sentPictures {
-			display: flex;
-			justify-content: center;
-			align-content: center;
-			flex-direction: row-reverse;
-		}
+	// 	#sentPictures {
+	// 		display: flex;
+	// 		justify-content: center;
+	// 		align-content: center;
+	// 		flex-direction: row-reverse;
+	// 	}
 
-		img {
-			flex-basis: auto;
-			border-radius: 50%;
-		}
-		
-		</style>
-		<h1>Kenziegram</h1>
-            <form id="pictureForm" method='post' action='/upload' enctype='multipart/form-data'>
-                <div >
-					<label for='image'>Choose a picture</label>
-					<br />
-                    <input type="file" id="image" name="image">
-				</div>
-                <div>
-                    <button>Send the picture</button>
-                </div>
-            </form>
-			<h2>Sent Pictures</h2>
-			<div id="sentPictures">
-            ${images}
-			</div>
-        `);
-	});
+	// 	img {
+	// 		flex-basis: auto;
+	// 		border-radius: 50%;
+	// 	}
+
+	// 	</style>
+	// 	<h1>Kenziegram</h1>
+	//         <form id="pictureForm" method='post' action='/upload' enctype='multipart/form-data'>
+	//             <div >
+	// 				<label for='image'>Choose a picture</label>
+	// 				<br />
+	//                 <input type="file" id="image" name="image">
+	// 			</div>
+	//             <div>
+	//                 <button>Send the picture</button>
+	//             </div>
+	//         </form>
+	// 		<h2>Sent Pictures</h2>
+	// 		<div id="sentPictures">
+	//         ${images}
+	// 		</div>
+	//     `);
+	// });
 });
 
 app.post("/upload", upload.single("image"), function (request, response, next) {
