@@ -1,6 +1,8 @@
+images: node:alpine
 pages:
   stage: deploy
   script:
+    - npm install
     - nodemon app.js
   artifacts:
     paths:
