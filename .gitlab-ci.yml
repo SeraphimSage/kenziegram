@@ -3,7 +3,7 @@ pages:
   stage: deploy
   script:
     - npm install
-    - nodemon app.js
+    - npm start
   artifacts:
     paths:
       - public
