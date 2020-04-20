@@ -1,4 +1,4 @@
-images: node:alpine
+image: node:alpine
 pages:
   stage: deploy
   script:
