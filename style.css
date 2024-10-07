@@ -23,12 +23,18 @@ h2 {
 
 #sentPictures {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
-	align-content: center;
-	flex-direction: row-reverse;
+	gap: 20px;
+	max-width: 80%;
+	margin: 0 auto;
 }
 
 img {
 	flex-basis: auto;
-	border-radius: 50%;
+	border-radius: 20px;
+	height: auto;
+	width: calc(33.3% - 20px);
+	max-width: 300px;
+	margin: 10px 0;
 }

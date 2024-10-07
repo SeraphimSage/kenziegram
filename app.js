@@ -23,11 +23,17 @@ let requestCount = 0;
 app.get("/", (req, res) => {
 	const path = "./public/uploads";
 	fs.readdir(path, (err, items) => {
-		const imagePath = "./public/uploads";
-		var modified = fs.statSync(imagePath).mtimeMs;
+		if (err) {
+			return res.status(500).send("Unable to read the directory.");
+		}
+
 		const images = items.map((image) => {
-			res.render("index", { title: "Kenziegram", images: items });
+			const imagePath = "./public/uploads";
+			var modified = fs.statSync(imagePath).mtimeMs;
+			return { filename: image, modifiedTime: modified };
 		});
+
+		res.render("index", { title: "Kenziegram", images: items });
 	});
 });
 
