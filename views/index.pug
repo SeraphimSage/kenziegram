@@ -14,4 +14,12 @@ html
         h2= "Sent pictures"
         div(id="sentPictures")
             each image in images
-                img(src="./uploads/" + image, style="height:200px", alt="")
+                picture
+                    if image.endsWith('.webp') && image.includes('gif')
+                        source(srcset="./uploads/" + image, type="image/webp")
+                        img(src="./uploads/" + image.replace(".webp", ".gif"), style="height:200px", alt="GIF/WebP")
+                    else if image.endsWith('.webp') 
+                        source(srcset="./uploads/" + image, type="image/webp")
+                        img(src="./uploads/" + image.replace(".webp", ext), style="height:200px", alt="WebP")
+                    else
+                        img(src="./uploads/" + image, style="height:200px", alt="")
